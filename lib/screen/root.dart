@@ -1,4 +1,6 @@
+import 'package:expense_tracker_flutter/screen/categories.dart';
 import 'package:expense_tracker_flutter/screen/home.dart';
+import 'package:expense_tracker_flutter/screen/scheduled_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker_flutter/widget/date_filter_button.dart';
 
@@ -11,30 +13,48 @@ class RootScreen extends StatefulWidget {
 
 class _RootState extends State<RootScreen> {
   int _selectedTab = 0;
+  String _selectedScreen = "home_screen";
   int _selectedPeriod = 0;
   String dateString = getDateString(0);
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static const List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    Text(
-      'Business',
+
+  static const Map<String, Widget> _widgetOptions = {
+    "home_screen": HomeScreen(),
+    "categories_screen": CategoriesScreen(),
+    "scheduled_expense_screen": ScheduledExpenseScreen(),
+    "transaction_screen": Text(
+      'Transcation',
       style: optionStyle,
     ),
-    Text(
-      'School',
+    "overview_screen": Text(
+      'Overview',
       style: optionStyle,
     ),
-    Text(
-      'Index 2: School',
+    "accounts_screen": Text(
+      'Accounts',
       style: optionStyle,
     ),
-  ];
+  };
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedTab = index;
+      switch(index){
+        case 0:
+          _selectedScreen = "home_screen";
+          break;
+        case 1:
+          _selectedScreen = "transaction_screen";
+          break;
+        case 2:
+          _selectedScreen = "overview_screen";
+          break;
+        case 3:
+          _selectedScreen = "accounts_screen";
+          break;
+      }
     });
   }
 
@@ -43,9 +63,47 @@ class _RootState extends State<RootScreen> {
     // TODO: implement build
     return Scaffold(
         appBar: AppBar(),
+        drawer: Drawer(
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                ),
+                child: Text('Drawer Header'),
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.home,
+                ),
+                title: const Text('Categories'),
+                onTap: () {
+                  Navigator.pop(context);
+                  setState((){
+                    _selectedScreen = "categories_screen";
+                  });
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.train,
+                ),
+                title: const Text('Scheduled Expense'),
+                onTap: () {
+                  Navigator.pop(context);
+                  setState((){
+                    _selectedScreen = "scheduled_expense_screen";
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
         body: Column(
           children: <Widget>[
-            if (_selectedTab <= 2) ...[
+            if (_selectedScreen != "accounts_screen") ...[
               DateFilterButton(
                   selectedPeriod: _selectedPeriod,
                   dateString: dateString,
@@ -56,7 +114,7 @@ class _RootState extends State<RootScreen> {
                     });
                   }),
             ],
-            _widgetOptions.elementAt(_selectedTab),
+            _widgetOptions[_selectedScreen]!
           ],
         ),
         bottomNavigationBar: BottomNavigationBar(

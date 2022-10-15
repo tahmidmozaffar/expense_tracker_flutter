@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,10 +8,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeState extends State<HomeScreen> {
-
-
   @override
   Widget build(BuildContext context) {
-    return Text("Home");
+    return Center(child: InkWell(onTap: () {}, child: Text("Home")));
   }
 }

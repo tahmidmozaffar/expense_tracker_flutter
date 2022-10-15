@@ -1,3 +1,5 @@
+import 'package:expense_tracker_flutter/screen/categories.dart';
+import 'package:expense_tracker_flutter/screen/scheduled_expense.dart';
 import 'package:flutter/material.dart';
 import 'screen/root.dart';
 
@@ -9,6 +11,8 @@ void main() {
       initialRoute: '/',
       routes: {
         '/': (context) => const RootScreen(),
+        '/categories': (context) => const CategoriesScreen(),
+        '/scheduled_expense': (context) => const ScheduledExpenseScreen(),
       },
     )
   );

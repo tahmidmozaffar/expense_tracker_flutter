@@ -25,7 +25,7 @@ class _RootState extends State<RootScreen> {
     "categories_screen": CategoriesScreen(),
     "scheduled_expense_screen": ScheduledExpenseScreen(),
     "transaction_screen": Text(
-      'Transcation',
+      'Transaction',
       style: optionStyle,
     ),
     "overview_screen": Text(
@@ -41,7 +41,7 @@ class _RootState extends State<RootScreen> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedTab = index;
-      switch(index){
+      switch (index) {
         case 0:
           _selectedScreen = "home_screen";
           break;
@@ -60,7 +60,10 @@ class _RootState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    bool shouldShowDateFilterButtons = _selectedScreen == "home_screen" ||
+        _selectedScreen == "transaction_screen" ||
+        _selectedScreen == "overview_screen";
+
     return Scaffold(
         appBar: AppBar(),
         drawer: Drawer(
@@ -78,22 +81,34 @@ class _RootState extends State<RootScreen> {
                 leading: Icon(
                   Icons.home,
                 ),
+                title: const Text('Home'),
+                onTap: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    _selectedScreen = "home_screen";
+                  });
+                },
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.category_rounded,
+                ),
                 title: const Text('Categories'),
                 onTap: () {
                   Navigator.pop(context);
-                  setState((){
+                  setState(() {
                     _selectedScreen = "categories_screen";
                   });
                 },
               ),
               ListTile(
                 leading: Icon(
-                  Icons.train,
+                  Icons.timer,
                 ),
                 title: const Text('Scheduled Expense'),
                 onTap: () {
                   Navigator.pop(context);
-                  setState((){
+                  setState(() {
                     _selectedScreen = "scheduled_expense_screen";
                   });
                 },
@@ -103,7 +118,7 @@ class _RootState extends State<RootScreen> {
         ),
         body: Column(
           children: <Widget>[
-            if (_selectedScreen != "accounts_screen") ...[
+            if (shouldShowDateFilterButtons) ...[
               DateFilterButton(
                   selectedPeriod: _selectedPeriod,
                   dateString: dateString,
@@ -117,29 +132,33 @@ class _RootState extends State<RootScreen> {
             _widgetOptions[_selectedScreen]!
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.note),
-                label: 'Transaction',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.grade),
-                label: 'Overview',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.account_balance),
-                label: 'Accounts',
-              ),
-            ],
-            currentIndex: _selectedTab,
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.amber[900],
-            onTap: _onItemTapped));
+        bottomNavigationBar: (_selectedScreen != "categories_screen" &&
+                _selectedScreen != "scheduled_expense_screen")
+            ? BottomNavigationBar(
+                backgroundColor: Colors.deepPurple,
+                items: const <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.home),
+                      label: 'Home',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.note),
+                      label: 'Transaction',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.grade),
+                      label: 'Overview',
+                    ),
+                    BottomNavigationBarItem(
+                      icon: Icon(Icons.account_balance),
+                      label: 'Accounts',
+                    ),
+                  ],
+                currentIndex: _selectedTab,
+                type: BottomNavigationBarType.fixed,
+                selectedItemColor: Colors.amber[900],
+                onTap: _onItemTapped)
+            : null);
   }
 
   static String getDateString(int selectedPeriod) {

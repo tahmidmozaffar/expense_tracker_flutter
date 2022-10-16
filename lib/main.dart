@@ -10,9 +10,7 @@ void main() {
       title: "Expense Tracker",
       initialRoute: '/',
       routes: {
-        '/': (context) => const RootScreen(),
-        '/categories': (context) => const CategoriesScreen(),
-        '/scheduled_expense': (context) => const ScheduledExpenseScreen(),
+        '/': (context) => const RootScreen()
       },
     )
   );

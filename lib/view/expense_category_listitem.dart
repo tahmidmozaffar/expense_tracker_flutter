@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class ExpenseCategoryListItem extends StatelessWidget {
+  final int id;
   final String iconName;
   final String title;
-  final Function() onPress;
+  final Function(int) onPress;
   final bool horizontal;
 
   const ExpenseCategoryListItem(
       {Key? key,
+      required this.id,
       required this.iconName,
       required this.title,
       required this.onPress,
@@ -18,9 +20,13 @@ class ExpenseCategoryListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> elements = [
-      SvgPicture.asset(
-        "assets/category_icons/$iconName",
-        width: 30,
+      Expanded(
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: SvgPicture.asset(
+            "assets/category_icons/$iconName",
+          ),
+        ),
       ),
       const SizedBox(height: 10),
       Text(
@@ -37,6 +43,7 @@ class ExpenseCategoryListItem extends StatelessWidget {
       );
     } else {
       container = Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: elements,
       );
     }
@@ -55,15 +62,15 @@ class ExpenseCategoryListItem extends StatelessWidget {
                 offset: Offset(1, 1))
           ]),
       width: 60,
-      margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 3),
+      margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 3),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           splashColor: Colors.black12,
-          onTap: onPress,
-          child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-              child: container),
+          onTap: () {
+            onPress(id);
+          },
+          child: Padding(padding: const EdgeInsets.all(5.0), child: container),
         ),
       ),
     );

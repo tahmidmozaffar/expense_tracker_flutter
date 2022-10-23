@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/expense_category.dart';
-import '../view/expense_category_listitem.dart';
+import '../view/expense_category_list_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

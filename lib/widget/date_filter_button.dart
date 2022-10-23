@@ -59,8 +59,7 @@ class DateFilterButton extends StatelessWidget {
             children: [
               InkWell(
                   onTap: () {
-                    onPressed(selectedPeriod,
-                        dateOffset > 0 ? dateOffset - 1 : dateOffset);
+                    onPressed(selectedPeriod, dateOffset + 1);
                   },
                   child: const Padding(
                     padding:
@@ -72,7 +71,8 @@ class DateFilterButton extends StatelessWidget {
                       fontSize: 18.0, fontWeight: FontWeight.bold)),
               InkWell(
                 onTap: () {
-                  onPressed(selectedPeriod, dateOffset + 1);
+                  onPressed(selectedPeriod,
+                      dateOffset > 0 ? dateOffset - 1 : dateOffset);
                 },
                 child: const Padding(
                   padding:

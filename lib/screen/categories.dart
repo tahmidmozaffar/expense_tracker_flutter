@@ -1,112 +1,29 @@
 import 'package:flutter/material.dart';
 
-class CategoriesScreen extends StatelessWidget {
+import '../utils.dart';
+import '../view/expense_category_list_item.dart';
 
+class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({
     Key? key,
   }) : super(key: key);
 
+  void onPress(int id) {
+    print(id);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black12,
-      height: MediaQuery.of(context).size.height - Scaffold.of(context).appBarMaxHeight!,
-      // height: double.infinity,
+    return Expanded(
       child: ListView(
-        padding: const EdgeInsets.all(8),
-        children: [
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[600],
-            child: const Center(child: Text('Entry A')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[500],
-            child: const Center(child: Text('Entry B')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[100],
-            child: const Center(child: Text('Entry C')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[600],
-            child: const Center(child: Text('Entry A')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[500],
-            child: const Center(child: Text('Entry B')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[100],
-            child: const Center(child: Text('Entry C')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[600],
-            child: const Center(child: Text('Entry A')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[500],
-            child: const Center(child: Text('Entry B')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[100],
-            child: const Center(child: Text('Entry C')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[600],
-            child: const Center(child: Text('Entry A')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[500],
-            child: const Center(child: Text('Entry B')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[100],
-            child: const Center(child: Text('Entry C')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[600],
-            child: const Center(child: Text('Entry A')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[500],
-            child: const Center(child: Text('Entry B')),
-          ),
-          Container(
-            width: 100,
-            height: 50,
-            color: Colors.amber[100],
-            child: const Center(child: Text('Entry C')),
-          ),
-        ],
-      ),
+          padding: const EdgeInsets.all(8),
+          children: List.from(Utils.getCategories.map((el) =>
+              ExpenseCategoryListItem(
+                  horizontal: true,
+                  id: el.id,
+                  iconName: el.iconName,
+                  title: el.title,
+                  onPress: onPress)))),
     );
   }
 }

@@ -19,6 +19,23 @@ class ExpenseCategoryListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> elementsHorizontal = [
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+        child: SvgPicture.asset(
+          "assets/category_icons/$iconName",
+          height: 40,
+          width: 40,
+          alignment: Alignment.centerLeft,
+        ),
+      ),
+      Text(
+        title,
+        overflow: TextOverflow.ellipsis,
+        style: const TextStyle(fontSize: 14),
+      )
+    ];
+
     List<Widget> elements = [
       Expanded(
         child: Padding(
@@ -39,7 +56,7 @@ class ExpenseCategoryListItem extends StatelessWidget {
     Widget? container;
     if (horizontal) {
       container = Row(
-        children: elements,
+        children: elementsHorizontal,
       );
     } else {
       container = Column(

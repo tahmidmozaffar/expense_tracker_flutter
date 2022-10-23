@@ -1,6 +1,7 @@
 import 'package:expense_tracker_flutter/screen/categories.dart';
 import 'package:expense_tracker_flutter/screen/home.dart';
 import 'package:expense_tracker_flutter/screen/scheduled_expense.dart';
+import 'package:expense_tracker_flutter/screen/transactions.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_tracker_flutter/widget/date_filter_button.dart';
 
@@ -33,10 +34,7 @@ class _RootState extends State<RootScreen> {
 
   static const pageViewWidgets = [
     HomeScreen(),
-    Text(
-      'Transaction',
-      style: optionStyle,
-    ),
+    TransactionScreen(),
     Text(
       'Overview',
       style: optionStyle,

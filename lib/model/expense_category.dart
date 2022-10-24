@@ -1,6 +1,7 @@
 class ExpenseCategory {
-  int id;
-  String iconName;
-  String title;
+  final int id;
+  final String iconName;
+  final String title;
+
   ExpenseCategory(this.id, this.iconName, this.title);
 }

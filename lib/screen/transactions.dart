@@ -14,14 +14,22 @@ class _TransactionScreenState extends State<TransactionScreen> {
   Widget build(BuildContext context) {
     return ListView(
       children: const [
-    TransactionListItem(
-        amount: 10.0,
-        currency: "\$",
-        expenseCategory: "Bills",
-        categoryIcon: "cat_bils",
-        note: "Note",
-        account: "Cash",
-        accountIcon: "Money"),
+        TransactionListItem(
+            amount: 10.0,
+            currency: "\$",
+            expenseCategory: "Bills",
+            categoryIcon: "cat_bils",
+            note: "Note",
+            account: "Cash",
+            accountIcon: "Money"),
+        TransactionListItem(
+            amount: 10.0,
+            currency: "\$",
+            expenseCategory: "Bills",
+            categoryIcon: "cat_bils",
+            note: "Note",
+            account: "Cash",
+            accountIcon: "Money"),
       ],
     );
   }
